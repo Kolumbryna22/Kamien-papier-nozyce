@@ -1,0 +1,27 @@
+@import 'general';
+
+header {
+    text-align: center;
+
+    h2 {
+        font-size: 40px;
+    }
+
+    p {
+        font-size: 25px;
+    }
+}
+
+.choise {
+    button {
+        margin: 20px;
+        display: block;
+        @include button-style($color, white);
+    }
+}
+
+.match {
+    p {
+        line-height: 1.5;
+    }
+}

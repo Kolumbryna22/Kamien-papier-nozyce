@@ -1,0 +1,30 @@
+$color: green;
+$size-p: 25px;
+
+section {
+    float: left;
+    width: 33%;
+}
+
+p {
+    font-size: $size-p;
+}
+
+@mixin button-style($back-color, $color) {
+    background-color: $back-color;
+    color: $color;
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    font-size: $size-p;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition-duration: 1s;
+  
+    &:hover {
+      background-color: $color;
+      border: 2px solid $back-color;
+      color: $back-color;
+    }
+  }

@@ -1,0 +1,36 @@
+section {
+  float: left;
+  width: 33%; }
+
+p {
+  font-size: 25px; }
+
+header {
+  text-align: center; }
+  header h2 {
+    font-size: 40px; }
+  header p {
+    font-size: 25px; }
+
+.choise button {
+  margin: 20px;
+  display: block;
+  background-color: green;
+  color: white;
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  font-size: 25px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition-duration: 1s; }
+  .choise button:hover {
+    background-color: white;
+    border: 2px solid green;
+    color: green; }
+
+.match p {
+  line-height: 1.5; }
+
+/*# sourceMappingURL=style.css.map */
