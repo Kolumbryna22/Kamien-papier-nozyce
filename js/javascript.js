@@ -5,7 +5,10 @@
     var papier = document.getElementById('papier');
     var nozyce = document.getElementById('nozyce');
     var wynik = document.getElementById('wynik');
+    var result = document.getElementById('result');
     var komputer;
+    var wygranaGracz = 0;
+    var wygranaKomputer = 0;
 
     var randomNumber = function(n) {
         var n = parseInt(n, 10);
@@ -27,11 +30,16 @@
 
         if((this == kamien && komputer == 0) || (this == papier && komputer == 1) || (this == nozyce && komputer == 2)) {
             wynik.innerHTML = 'Remis: zagrałeś: ' + this.innerHTML + ', komputer zagrał: ' + checkKomputer() + '<br>' + wynik.innerHTML;
+            result.innerHTML = wygranaGracz + '-' + wygranaKomputer + '<br>' + result.innerHTML;
         }
         else if((this == kamien && komputer == 2) || (this == papier && komputer == 0) || (this == nozyce && komputer == 1)) {
             wynik.innerHTML = 'Wygrana: zagrałeś: ' + this.innerHTML + ', komputer zagrał: ' + checkKomputer() + '<br>' + wynik.innerHTML;
+            wygranaGracz++;
+            result.innerHTML = wygranaGracz + '-' + wygranaKomputer + '<br>' + result.innerHTML;
         } else {
             wynik.innerHTML = 'Przegrana: zagrałeś: ' + this.innerHTML + ', komputer zagrał: ' + checkKomputer() + '<br>' + wynik.innerHTML;
+            wygranaKomputer++;
+            result.innerHTML = wygranaGracz + '-' + wygranaKomputer + '<br>' + result.innerHTML;
         }
     };
 

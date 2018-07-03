@@ -1,9 +1,6 @@
-section {
-  float: left;
-  width: 33%; }
-
 p {
-  font-size: 25px; }
+  font-size: 25px;
+  line-height: 1.5; }
 
 header {
   text-align: center; }
@@ -11,6 +8,10 @@ header {
     font-size: 40px; }
   header p {
     font-size: 25px; }
+
+section {
+  float: left;
+  width: 33%; }
 
 .choise button {
   margin: 20px;
@@ -30,7 +31,11 @@ header {
     border: 2px solid green;
     color: green; }
 
-.match p {
-  line-height: 1.5; }
+.score {
+  text-align: center; }
+  .score .score-kolumn {
+    float: left;
+    width: 50%;
+    text-align: center; }
 
 /*# sourceMappingURL=style.css.map */

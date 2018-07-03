@@ -1,13 +1,9 @@
 $color: green;
 $size-p: 25px;
 
-section {
-    float: left;
-    width: 33%;
-}
-
 p {
     font-size: $size-p;
+    line-height: 1.5;
 }
 
 @mixin button-style($back-color, $color) {
@@ -27,4 +23,9 @@ p {
       border: 2px solid $back-color;
       color: $back-color;
     }
-  }
+}
+
+@mixin wyrownanie($width) {
+    float: left;
+    width: $width;
+}

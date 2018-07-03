@@ -12,6 +12,10 @@ header {
     }
 }
 
+section {
+    @include wyrownanie(33%);
+}
+
 .choise {
     button {
         margin: 20px;
@@ -20,8 +24,11 @@ header {
     }
 }
 
-.match {
-    p {
-        line-height: 1.5;
+.score {
+    text-align: center;
+    
+    .score-kolumn {
+        @include wyrownanie(50%);
+        text-align: center;
     }
 }
