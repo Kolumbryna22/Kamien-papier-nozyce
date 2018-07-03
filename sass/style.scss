@@ -10,6 +10,10 @@ header {
     p {
         font-size: 25px;
     }
+
+    button {
+        @include button-style($color, white);
+    }
 }
 
 section {
@@ -26,7 +30,7 @@ section {
 
 .score {
     text-align: center;
-    
+
     .score-kolumn {
         @include wyrownanie(50%);
         text-align: center;
