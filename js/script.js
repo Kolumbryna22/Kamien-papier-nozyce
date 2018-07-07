@@ -20,12 +20,13 @@
         round.innerHTML = roundCount;
         winPlayer = 0;
         winKomputer = 0;
+        result.innerHTML = '';
         resultCount.innerHTML = '';
     };
 
     var randomNumber = function(rowNumber) {
         var n = parseInt(rowNumber, 10);
-        return Math.floor(Math.random()*x);
+        return Math.floor(Math.random()*n);
     };
 
     var checkKomputer = function() {
