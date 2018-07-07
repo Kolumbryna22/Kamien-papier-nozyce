@@ -5,22 +5,22 @@
     var papier = document.getElementById('papier');
     var nozyce = document.getElementById('nozyce');
     var wynik = document.getElementById('wynik');
-    var result = document.getElementById('result');
+    var resultCount = document.getElementById('resultCount');
     var roundButton = document.getElementById('newGame');
     var round = document.getElementById('round');
-    var rundCount;
+    var roundCount;
     var game = false;
     var komputer;
     var winPlayer = 0;
     var winKomputer = 0;
 
     var newGame = function() {
-        rundCount = window.prompt("Wpisz liczbę rund, którą chcesz rozegrać");
+        roundCount = window.prompt("Wpisz liczbę rund, którą chcesz rozegrać");
         game = true;
-        round.innerHTML = rundCount;
+        round.innerHTML = roundCount;
         winPlayer = 0;
         winKomputer = 0;
-        result.innerHTML = '';
+        resultCount.innerHTML = '';
     };
 
     var randomNumber = function(n) {
@@ -43,15 +43,19 @@
     };
 
     var checkWin = function() {
+        var win;
+
         if(winPlayer > winKomputer) {
-            return 'Wygrana';
+            win = 'Wygrana';
         } 
         else if(winPlayer === winKomputer) {
-            return 'Remis';
+            win = 'Remis';
         } 
         else {
-            return 'Przegrana';
+            win = 'Przegrana';
         }
+
+        return win;
     };
 
     var playerMove = function(event) {
@@ -59,22 +63,22 @@
 
         if((this === kamien && komputer === 0) || (this === papier && komputer === 1) || (this === nozyce && komputer === 2)) {
             wynik.innerHTML = 'Remis: zagrałeś: ' + this.innerHTML + ', komputer zagrał: ' + checkKomputer() + '<br>' + wynik.innerHTML;
-            result.innerHTML = winPlayer + '-' + winKomputer + '<br>' + result.innerHTML;
+            resultCount.innerHTML = winPlayer + '-' + winKomputer + '<br>' + resultCount.innerHTML;
         }
         else if((this === kamien && komputer === 2) || (this === papier && komputer === 0) || (this === nozyce && komputer === 1)) {
             wynik.innerHTML = 'Wygrana: zagrałeś: ' + this.innerHTML + ', komputer zagrał: ' + checkKomputer() + '<br>' + wynik.innerHTML;
             winPlayer++;
-            result.innerHTML = winPlayer + '-' + winKomputer + '<br>' + result.innerHTML;
+            resultCount.innerHTML = winPlayer + '-' + winKomputer + '<br>' + resultCount.innerHTML;
         } else {
             wynik.innerHTML = 'Przegrana: zagrałeś: ' + this.innerHTML + ', komputer zagrał: ' + checkKomputer() + '<br>' + wynik.innerHTML;
             winKomputer++;
-            result.innerHTML = winPlayer + '-' + winKomputer + '<br>' + result.innerHTML;
+            resultCount.innerHTML = winPlayer + '-' + winKomputer + '<br>' + resultCount.innerHTML;
         }
 
-        rundCount = game ? (rundCount - 1) : 0;
-        round.innerHTML = game ? rundCount : '';
+        roundCount = game ? (roundCount - 1) : 0;
+        round.innerHTML = game ? roundCount : '';
 
-        if(rundCount === 0 && game === true) {
+        if(roundCount === 0 && game === true) {
             game = false;
             round.innerHTML = checkWin() + ' wynikiem: ' + winPlayer + '-' + winKomputer;
         }
