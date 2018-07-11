@@ -24,8 +24,8 @@
         resultCount.innerHTML = '';
     };
 
-    var randomNumber = function(rowNumber) {
-        var n = parseInt(rowNumber, 10);
+    var randomNumber = function(rawNumber) {
+        var n = parseInt(rawNumber, 10);
         return Math.floor(Math.random()*n);
     };
 
