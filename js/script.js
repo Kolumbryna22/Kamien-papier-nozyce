@@ -13,7 +13,7 @@
     var winKomputer = 0;
     var i;
 
-    var newGame = function() {
+    function newGame() {
         roundCount = window.prompt("Wpisz liczbę rund, którą chcesz rozegrać");
         game = true;
         round.innerHTML = roundCount;
@@ -23,13 +23,13 @@
         resultCount.innerHTML = '';
     };
 
-    var randomNumber = function(rowNumber) {
+    function randomNumber(rowNumber) {
         var n = parseInt(rowNumber, 10);
 
         return Math.floor(Math.random()*n);
     };
 
-    var checkKomputer = function() {
+    function checkKomputer() {
         var pick = 'Nożyce';
 
         if (komputer === 0) {
@@ -41,7 +41,7 @@
         return pick;
     };
 
-    var checkWin = function() {
+    function checkWin() {
         var win = 'Przegrana';
 
         if (winPlayer > winKomputer) {
@@ -54,7 +54,7 @@
         return win;
     };
 
-    var roundUpdate = function() {
+    function roundUpdate() {
         roundCount = game ? (roundCount - 1) : 0;
         round.innerHTML = game ? roundCount : '';
 
@@ -77,7 +77,7 @@
         return polishWord;
     };
 
-    var playerMove = function(choise) {
+    function playerMove(choise) {
         komputer = randomNumber(3);
 
         if ((choise === 'stone' && komputer === 0) || (choise === 'paper' && komputer === 1) || (choise === 'scissors' && komputer === 2)) {
