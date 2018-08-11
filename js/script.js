@@ -1,18 +1,17 @@
 (function() {
     'use strict';
 
-    var stone = document.getElementById('stone');
-    var paper = document.getElementById('paper');
-    var scissors = document.getElementById('scissors');
     var result = document.getElementById('result');
     var resultCount = document.getElementById('resultCount');
     var roundButton = document.getElementById('newGame');
     var round = document.getElementById('round');
+    var playerChoise = document.querySelectorAll('.player-move');
     var roundCount;
     var game = false;
     var komputer;
     var winPlayer = 0;
     var winKomputer = 0;
+    var i;
 
     var newGame = function() {
         roundCount = window.prompt("Wpisz liczbę rund, którą chcesz rozegrać");
@@ -26,6 +25,7 @@
 
     var randomNumber = function(rowNumber) {
         var n = parseInt(rowNumber, 10);
+
         return Math.floor(Math.random()*n);
     };
 
@@ -44,10 +44,10 @@
     var checkWin = function() {
         var win = 'Przegrana';
 
-        if(winPlayer > winKomputer) {
+        if (winPlayer > winKomputer) {
             win = 'Wygrana';
         } 
-        else if(winPlayer === winKomputer) {
+        else if (winPlayer === winKomputer) {
             win = 'Remis';
         }
 
@@ -58,24 +58,37 @@
         roundCount = game ? (roundCount - 1) : 0;
         round.innerHTML = game ? roundCount : '';
 
-        if(roundCount === 0 && game === true) {
+        if (roundCount === 0 && game === true) {
             game = false;
             round.innerHTML = checkWin() + ' wynikiem: ' + winPlayer + '-' + winKomputer;
         }
     };
 
-    var playerMove = function(event) {
+    function parseToPolish(word) {
+        var polishWord = 'Papier';
+
+        if (word == 'stone') {
+            polishWord = 'Kamień';
+        }
+        else if (word == 'scissors') {
+            polishWord = 'Nożyce';
+        }
+
+        return polishWord;
+    };
+
+    var playerMove = function(choise) {
         komputer = randomNumber(3);
 
-        if((this === stone && komputer === 0) || (this === paper && komputer === 1) || (this === scissors && komputer === 2)) {
-            result.innerHTML = 'Remis: zagrałeś: ' + this.innerHTML + ', komputer zagrał: ' + checkKomputer() + '<br>' + result.innerHTML;
+        if ((choise === 'stone' && komputer === 0) || (choise === 'paper' && komputer === 1) || (choise === 'scissors' && komputer === 2)) {
+            result.innerHTML = 'Remis: zagrałeś: ' + parseToPolish(choise) + ', komputer zagrał: ' + checkKomputer() + '<br>' + result.innerHTML;
             resultCount.innerHTML = winPlayer + '-' + winKomputer + '<br>' + resultCount.innerHTML;
-        } else if((this === stone && komputer === 2) || (this === paper && komputer === 0) || (this === scissors && komputer === 1)) {
-            result.innerHTML = 'Wygrana: zagrałeś: ' + this.innerHTML + ', komputer zagrał: ' + checkKomputer() + '<br>' + result.innerHTML;
+        } else if (('choise' === 'stone' && komputer === 2) || (choise === 'paper' && komputer === 0) || (choise === 'scissors' && komputer === 1)) {
+            result.innerHTML = 'Wygrana: zagrałeś: ' + parseToPolish(choise) + ', komputer zagrał: ' + checkKomputer() + '<br>' + result.innerHTML;
             winPlayer++;
             resultCount.innerHTML = winPlayer + '-' + winKomputer + '<br>' + resultCount.innerHTML;
         } else {
-            result.innerHTML = 'Przegrana: zagrałeś: ' + this.innerHTML + ', komputer zagrał: ' + checkKomputer() + '<br>' + result.innerHTML;
+            result.innerHTML = 'Przegrana: zagrałeś: ' + parseToPolish(choise) + ', komputer zagrał: ' + checkKomputer() + '<br>' + result.innerHTML;
             winKomputer++;
             resultCount.innerHTML = winPlayer + '-' + winKomputer + '<br>' + resultCount.innerHTML;
         }
@@ -83,8 +96,9 @@
         roundUpdate();
     };
 
-    stone.addEventListener('click', playerMove);
-    paper.addEventListener('click', playerMove);
-    scissors.addEventListener('click', playerMove);
     roundButton.addEventListener('click', newGame);
+
+    for (i = 0; i < playerChoise.length; i++) {
+        playerChoise[i].addEventListener('click', playerMove(playerChoise[i].getAttribute('data-move')));
+    }
 })();
