@@ -6,6 +6,26 @@ p {
     line-height: 1.5;
 }
 
+header {
+    text-align: center;
+
+    h2 {
+        font-size: 40px;
+    }
+
+    p {
+        font-size: 25px;
+    }
+
+    button {
+        @include button-style($color, white);
+    }
+}
+
+section {
+    @include wyrownanie(33%);
+}
+
 @mixin button-style($back-color, $color) {
     background-color: $back-color;
     color: $color;

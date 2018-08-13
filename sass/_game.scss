@@ -1,0 +1,16 @@
+.choise {
+    button {
+        margin: 20px;
+        display: block;
+        @include button-style($color, white);
+    }
+}
+
+.score {
+    text-align: center;
+
+    .score-kolumn {
+        @include wyrownanie(50%);
+        text-align: center;
+    }
+}
