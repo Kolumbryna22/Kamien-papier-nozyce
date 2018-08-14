@@ -48,6 +48,7 @@
     };
 
     function newGame() {
+        event.preventDefault();
         var rounds = document.getElementById('gameRoudns').value;
 
         if (rounds) {
@@ -57,6 +58,8 @@
             result.innerHTML = '';
             resultCount.innerHTML = '';
         }
+        
+        getInfo.style.display = "none";
     };
 
     function checkKomputer() {
