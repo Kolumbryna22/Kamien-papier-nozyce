@@ -44,17 +44,17 @@
         getInfo.style.display = "block";
     };
 
-    function closeInfo() {
+    function hideInfo() {
         getInfo.style.display = "none";
     };
 
-    function closeHistory() {
+    function hideHistory() {
         history.style.display = "none";
     };
 
     function newGame() {
         event.preventDefault();
-        var rounds = document.getElementById('gameRoudns').value;
+        var rounds = document.getElementById('gameRounds').value;
 
         if (rounds > 0) {
             params.roundCount = rounds;
@@ -142,8 +142,8 @@
     };
 
     roundButton.addEventListener('click', showInfo);
-    closeInfoButton.addEventListener('click', closeInfo);
-    closeHistoryButton.addEventListener('click', closeHistory);
+    closeInfoButton.addEventListener('click', hideInfo);
+    closeHistoryButton.addEventListener('click', hideHistory);
     sendRounds.addEventListener('submit', newGame);
 
     for (i = 0; i < playerChoise.length; i++) {
