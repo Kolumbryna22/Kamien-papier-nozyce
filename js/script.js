@@ -87,11 +87,21 @@
     function roundUpdate() {
         params.roundCount = params.game ? (params.roundCount - 1) : 0;
         round.innerHTML = params.game ? params.roundCount : '';
+        game ? historyUpdate() : '';
 
         if (params.roundCount === 0 && params.game) {
             params.game = false;
+            historyShow();
             round.innerHTML = checkWin() + ' wynikiem: ' + params.winPlayer + '-' + params.winKomputer;
         }
+    };
+
+    function historyShow() {
+
+    };
+
+    function historyUpdate() {
+
     };
 
     function playerMove(event) {
@@ -109,13 +119,13 @@
             params.winKomputer++;
             resultCount.innerHTML = params.winPlayer + '-' +params.winKomputer + '<br>' + resultCount.innerHTML;
         }
-
+        
         roundUpdate();
     };
 
     roundButton.addEventListener('click', showInfo);
     closeInfo.addEventListener('click', closeInfo);
-    sendRounds.addEventListener('click', newGame);
+    sendRounds.addEventListener('submit', newGame);
 
     for (i = 0; i < playerChoise.length; i++) {
         playerChoise[i].addEventListener('click', playerMove);
