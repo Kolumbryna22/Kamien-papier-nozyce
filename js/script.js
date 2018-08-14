@@ -2,30 +2,29 @@
     'use strict';
 
     var params = {
-        winPlayer: 0,
-        winKomputer: 0,
-        komputer: 0,
+        scorePlayer: 0,
+        scoreComputer: 0,
+        computer: 0,
         game: false,
         roundCount: 0,
 
         history: {
             round: 0,
             movePlayer: [],
-            moveKomputer: [],
+            moveComputer: [],
             roundResult: [],
-            gameResult: '',
         },
 
         setNewGame: function(rounds) {
             params.game = true;
-            params.winPlayer = 0;
-            params.winKomputer = 0;
+            params.scorePlayer = 0;
+            params.scoreComputer = 0;
         },
 
-        randomKomputer: function(rowNumber) {
+        randomComputer: function(rowNumber) {
             var n = parseInt(rowNumber, 10);
     
-            this.komputer = Math.floor(Math.random()*n);
+            this.computer = Math.floor(Math.random()*n);
         },
     }
 
@@ -35,8 +34,10 @@
     var round = document.getElementById('round');
     var playerChoise = document.querySelectorAll('.player-move');
     var getInfo = document.getElementById('getInfo');
-    var closeInfo = document.getElementById('closeModal');
+    var closeInfoButton = document.getElementById('closeModal');
+    var closeHistoryButton = document.getElementById('closeHistory');
     var sendRounds = document.getElementById('sendRounds');
+    var history = document.getElementById('history');
     var i;
 
     function showInfo() {
@@ -47,11 +48,15 @@
         getInfo.style.display = "none";
     };
 
+    function closeHistory() {
+        history.style.display = "none";
+    };
+
     function newGame() {
         event.preventDefault();
         var rounds = document.getElementById('gameRoudns').value;
 
-        if (rounds) {
+        if (rounds > 0) {
             params.roundCount = rounds;
             params.setNewGame(rounds);
             round.innerHTML = rounds;
@@ -62,12 +67,12 @@
         getInfo.style.display = "none";
     };
 
-    function checkKomputer() {
+    function checkComputer() {
         var pick = 'Nożyce';
 
-        if (params.komputer === 0) {
+        if (params.computer === 0) {
             pick = 'Kamień';
-        } else if (params.komputer === 1) {
+        } else if (params.computer === 1) {
             pick = 'Papier';
         }
 
@@ -77,10 +82,10 @@
     function checkWin() {
         var win = 'Przegrana';
 
-        if (params.winPlayer > params.winKomputer) {
+        if (params.scorePlayer > params.scoreComputer) {
             win = 'Wygrana';
         } 
-        else if (params.winPlayer === params.winKomputer) {
+        else if (params.scorePlayer === params.scoreComputer) {
             win = 'Remis';
         }
 
@@ -90,44 +95,55 @@
     function roundUpdate() {
         params.roundCount = params.game ? (params.roundCount - 1) : 0;
         round.innerHTML = params.game ? params.roundCount : '';
-        game ? historyUpdate() : '';
 
-        if (params.roundCount === 0 && params.game) {
+        if (params.roundCount <= 0 && params.game) {
             params.game = false;
             historyShow();
-            round.innerHTML = checkWin() + ' wynikiem: ' + params.winPlayer + '-' + params.winKomputer;
         }
+    };
+
+    function historyUpdate(roundResult, movePlayer, moveComputer) {
+        params.history.round.push(params.roundCount);
+        params.history.movePlayer.push(movePlayer);
+        params.history.moveComputer.push(moveComputer);
+        params.history.roundResult.push(roundResult);
     };
 
     function historyShow() {
-
+        history.style.display = "block";
+        round.innerHTML = checkWin() + ' wynikiem: ' + params.scorePlayer + ' - ' + params.scoreComputer;
     };
 
-    function historyUpdate() {
-
+    function showRoundResult(roundResult, movePlayer, moveComputer) {
+        result.innerHTML = roundResult + ': zagrałeś: ' + movePlayer + ', komputer zagrał: ' + moveComputer + '<br>' + result.innerHTML;
+        resultCount.innerHTML = params.scorePlayer + '-' + params.scoreComputer + '<br>' + resultCount.innerHTML;
     };
 
     function playerMove(event) {
-        params.randomKomputer(3);
+        var moveComputer;
+        var roundResult;
 
-        if ((this === stone && params.komputer === 0) || (this === paper && params.komputer === 1) || (this === scissors && params.komputer === 2)) {
-            result.innerHTML = 'Remis: zagrałeś: ' + this.innerHTML + ', komputer zagrał: ' + checkKomputer() + '<br>' + result.innerHTML;
-            resultCount.innerHTML = params.winPlayer + '-' + params.winKomputer + '<br>' + resultCount.innerHTML;
-        } else if ((this === stone && params.komputer === 2) || (this === paper && params.komputer === 0) || (this === scissors && params.komputer === 1)) {
-            result.innerHTML = 'Wygrana: zagrałeś: ' + this.innerHTML + ', komputer zagrał: ' + checkKomputer() + '<br>' + result.innerHTML;
-            params.winPlayer++;
-            resultCount.innerHTML = params.winPlayer + '-' + params.winKomputer + '<br>' + resultCount.innerHTML;
+        params.randomComputer(3);
+        moveComputer = checkComputer();
+
+        if ((this === stone && params.computer === 0) || (this === paper && params.computer === 1) || (this === scissors && params.computer === 2)) {
+            roundResult = 'Remis';
+        } else if ((this === stone && params.computer === 2) || (this === paper && params.computer === 0) || (this === scissors && params.computer === 1)) {
+            params.scorePlayer++;
+            roundResult = 'Wygrana';
         } else {
-            result.innerHTML = 'Przegrana: zagrałeś: ' + this.innerHTML + ', komputer zagrał: ' + checkKomputer() + '<br>' + result.innerHTML;
-            params.winKomputer++;
-            resultCount.innerHTML = params.winPlayer + '-' +params.winKomputer + '<br>' + resultCount.innerHTML;
+            params.scoreComputer++;
+            roundResult = 'Przegrana';
         }
         
+        showRoundResult(roundResult, this.innerHTML, moveComputer);
+        params.game ? historyUpdate(roundResult, this.innerHTML, moveComputer) : '';
         roundUpdate();
     };
 
     roundButton.addEventListener('click', showInfo);
-    closeInfo.addEventListener('click', closeInfo);
+    closeInfoButton.addEventListener('click', closeInfo);
+    closeHistoryButton.addEventListener('click', closeHistory);
     sendRounds.addEventListener('submit', newGame);
 
     for (i = 0; i < playerChoise.length; i++) {
