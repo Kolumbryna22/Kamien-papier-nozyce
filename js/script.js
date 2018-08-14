@@ -8,6 +8,14 @@
         game: false,
         roundCount: 0,
 
+        history: {
+            round: 0,
+            movePlayer: '',
+            moveKomputer: '',
+            roundResult: '',
+            gameResult: '',
+        },
+
         setNewGame: function(rounds) {
             params.game = true;
             params.winPlayer = 0;
