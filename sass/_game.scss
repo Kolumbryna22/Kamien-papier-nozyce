@@ -2,7 +2,6 @@
     button {
         margin: 20px;
         display: block;
-        @include button-style($color, white);
     }
 }
 

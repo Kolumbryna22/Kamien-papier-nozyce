@@ -1,6 +1,7 @@
 p {
   font-size: 25px;
   line-height: 1.5;
+  font-size: 20px;
 }
 
 header {
@@ -15,33 +16,12 @@ header p {
   font-size: 25px;
 }
 
-header button {
-  background-color: green;
-  color: white;
-  width: 200px;
-  height: 50px;
-  border: none;
-  border-radius: 5px;
-  font-size: 25px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition-duration: 1s;
-}
-
-header button:hover {
-  background-color: white;
-  border: 2px solid green;
-  color: green;
-}
-
 section {
   float: left;
   width: 33%;
 }
 
-.choise button {
-  margin: 20px;
-  display: block;
+button {
   background-color: green;
   color: white;
   width: 200px;
@@ -54,10 +34,15 @@ section {
   transition-duration: 1s;
 }
 
-.choise button:hover {
+button:hover {
   background-color: white;
   border: 2px solid green;
   color: green;
+}
+
+.choise button {
+  margin: 20px;
+  display: block;
 }
 
 .score {
@@ -68,6 +53,50 @@ section {
   float: left;
   width: 50%;
   text-align: center;
+}
+
+.modal {
+  position: fixed;
+  display: none;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 90px;
+}
+
+.modal-container {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.modal-container h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.modal-container input {
+  width: 50px;
+  margin: 30px auto;
+  display: block;
+  padding: 12px;
+  border: 2px solid green;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.modal-container .button-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
 }
 
 /*# sourceMappingURL=style.css.map */

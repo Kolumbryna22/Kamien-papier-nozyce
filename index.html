@@ -8,8 +8,15 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="modal">
-        <div class="modal-container"></div>
+    <div class="modal" id="getInfo">
+        <div class="modal-container">
+            <h2>Wpisz liczbę rund, którą chcesz rozegrać</h2>
+            <form>
+                <input type="number" name="gameRoudns" id="gameRoudns">
+                <button class="button-close" id="closeModal">X</button>
+                <button type="submit" id="sendRounds">Zacznij grę!</button>
+            </form>
+        </div>
     </div>
     <header>
         <h2>Kamień papier nożyce</h2>

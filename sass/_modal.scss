@@ -9,5 +9,34 @@
 }
 
 .modal-container {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
     background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    position: relative;
+    
+    h2 {
+        @include clear-mp;
+    }
+
+    input {
+        width: 50px;
+        margin: 30px auto;
+        display: block;
+        padding: 12px;
+        border: 2px solid $color;
+        border-radius: 5px;
+        font-size: 20px;
+    }
+
+    .button-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+    }
 }
