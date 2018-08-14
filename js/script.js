@@ -10,9 +10,9 @@
 
         history: {
             round: 0,
-            movePlayer: '',
-            moveKomputer: '',
-            roundResult: '',
+            movePlayer: [],
+            moveKomputer: [],
+            roundResult: [],
             gameResult: '',
         },
 
@@ -58,7 +58,7 @@
             result.innerHTML = '';
             resultCount.innerHTML = '';
         }
-        
+
         getInfo.style.display = "none";
     };
 
