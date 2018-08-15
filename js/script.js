@@ -9,7 +9,7 @@
         roundCount: 0,
 
         history: {
-            round: 0,
+            round: [],
             movePlayer: [],
             moveComputer: [],
             roundResult: [],
@@ -19,6 +19,7 @@
             params.game = true;
             params.scorePlayer = 0;
             params.scoreComputer = 0;
+            params.roundCount = rounds;
         },
 
         randomComputer: function(rowNumber) {
@@ -49,6 +50,16 @@
     };
 
     function hideHistory() {
+        //first remove gameHistory, then add empty div for next history
+        
+        var gameHistory = document.getElementById('gameHistory');
+        var div;
+        var historyContainer = document.getElementById('historyContainer');
+
+        gameHistory.remove();
+        div = document.createElement("div");
+        div.setAttribute('id', 'gameHistory');
+        historyContainer.appendChild(div);
         history.style.display = "none";
     };
 
@@ -57,7 +68,6 @@
         var rounds = document.getElementById('gameRounds').value;
 
         if (rounds > 0) {
-            params.roundCount = rounds;
             params.setNewGame(rounds);
             round.innerHTML = rounds;
             result.innerHTML = '';
@@ -108,10 +118,33 @@
         params.history.moveComputer.push(moveComputer);
         params.history.roundResult.push(roundResult);
     };
+    
+    function addElement(text) {
+        // create element with given text
+
+        var output = document.createElement("p");
+        output.innerHTML = text;
+
+        return output;
+    }
 
     function historyShow() {
+        var historyWinner = document.getElementById('historyWinner');
+        var historyScore = document.getElementById('historyScore');
+        var gameHistory = document.getElementById('gameHistory');
+
         history.style.display = "block";
-        round.innerHTML = checkWin() + ' wynikiem: ' + params.scorePlayer + ' - ' + params.scoreComputer;
+        historyWinner.innerHTML = checkWin() + '!!';
+        historyScore.innerHTML = 'Wynikiem: ' + params.scorePlayer + ' - ' + params.scoreComputer;
+
+        for (i = 0; i < params.history.round.length; i++) {
+            gameHistory.appendChild(addElement('Runda: ' + params.history.round[i]));
+            gameHistory.appendChild(addElement('Zagrałeś: ' + params.history.movePlayer[i] + ', komputer zagrał: ' + params.history.moveComputer[i]));
+            gameHistory.appendChild(addElement('Wynik rundy: ' + params.history.roundResult[i]));
+        }
+
+        result.innerHTML = '';
+        resultCount.innerHTML = '';
     };
 
     function showRoundResult(roundResult, movePlayer, moveComputer) {
