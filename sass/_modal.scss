@@ -18,6 +18,7 @@
     padding: 30px;
     border-radius: 10px;
     position: relative;
+    overflow: auto;
     
     h2 {
         @include clear-mp;

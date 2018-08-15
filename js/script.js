@@ -9,7 +9,7 @@
         roundCount: 0,
 
         history: {
-            round: [],
+            round: 1,
             movePlayer: [],
             moveComputer: [],
             roundResult: [],
@@ -61,6 +61,10 @@
         div.setAttribute('id', 'gameHistory');
         historyContainer.appendChild(div);
         history.style.display = "none";
+        params.history.round = 1;
+        params.history.movePlayer = [];
+        params.history.moveComputer = [];
+        params.history.roundResult = [];
     };
 
     function newGame() {
@@ -110,10 +114,11 @@
             params.game = false;
             historyShow();
         }
+
+        params.history.round++;
     };
 
     function historyUpdate(roundResult, movePlayer, moveComputer) {
-        params.history.round.push(params.roundCount);
         params.history.movePlayer.push(movePlayer);
         params.history.moveComputer.push(moveComputer);
         params.history.roundResult.push(roundResult);
@@ -137,14 +142,15 @@
         historyWinner.innerHTML = checkWin() + '!!';
         historyScore.innerHTML = 'Wynikiem: ' + params.scorePlayer + ' - ' + params.scoreComputer;
 
-        for (i = 0; i < params.history.round.length; i++) {
-            gameHistory.appendChild(addElement('Runda: ' + params.history.round[i]));
+        for (i = 0; i < params.history.round; i++) {
+            gameHistory.appendChild(addElement('Runda: ' + (i + 1)));
             gameHistory.appendChild(addElement('Zagrałeś: ' + params.history.movePlayer[i] + ', komputer zagrał: ' + params.history.moveComputer[i]));
             gameHistory.appendChild(addElement('Wynik rundy: ' + params.history.roundResult[i]));
         }
 
         result.innerHTML = '';
         resultCount.innerHTML = '';
+        params.history.round = 1;
     };
 
     function showRoundResult(roundResult, movePlayer, moveComputer) {
@@ -152,7 +158,7 @@
         resultCount.innerHTML = params.scorePlayer + '-' + params.scoreComputer + '<br>' + resultCount.innerHTML;
     };
 
-    function playerMove(event) {
+    function playerMove() {
         var moveComputer;
         var roundResult;
 
