@@ -67,7 +67,7 @@
         params.history.roundResult = [];
     };
 
-    function newGame() {
+    function newGame(event) {
         event.preventDefault();
         var rounds = document.getElementById('gameRounds').value;
 
