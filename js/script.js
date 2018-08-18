@@ -16,10 +16,10 @@
         },
 
         setNewGame: function(rounds) {
-            params.game = true;
-            params.scorePlayer = 0;
-            params.scoreComputer = 0;
-            params.roundCount = rounds;
+            this.game = true;
+            this.scorePlayer = 0;
+            this.scoreComputer = 0;
+            this.roundCount = rounds;
         },
 
         randomComputer: function(rowNumber) {
